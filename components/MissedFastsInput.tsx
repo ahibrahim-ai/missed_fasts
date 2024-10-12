@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useState } from "react";
 import { Input } from "../components/ui/input"; 
 import { Label } from "../components/ui/label"; 
+import { Button } from "../components/ui/button"; 
 import { DayPicker } from "react-day-picker";
 import dayjs from "dayjs";
 import 'react-day-picker/dist/style.css'; // Import react-day-picker styles
@@ -12,6 +14,7 @@ const MissedFastsInput = () => {
   const [firstDay, setFirstDay] = React.useState<Date>(new Date());
   const [cycleLength, setCycleLength] = React.useState<number>(28);
   const [menstruationDuration, setMenstruationDuration] = React.useState<number>(7);
+  const [selectedToggle, setSelectedToggle] = useState<string | null>(null); // Selected fasting pattern
   const [error, setError] = React.useState<string>("");
 
   // Handler for the missed fasts input change
@@ -61,54 +64,42 @@ const MissedFastsInput = () => {
     return menstruationDays;
   };
 
-  // Calculate available days that do not overlap with menstruation days and are in the future
-  const calculateAvailableDays = (): Date[] => {
+  const calculateHighlightedDays = React.useMemo(() => {
     if (!firstDay || missedFasts === 0) return [];
 
-    const availableDays: Date[] = [];
-    const menstruationDays = calculateMenstruationDays();
+    let highlightedDays: Date[] = [];
+    const today = new Date();
 
-    // Get tomorrow's date
-    const tomorrow = dayjs().add(1, 'day');
-
-    // Start from the first day and try to find 'missedFasts' number of available days
-    let currentDay = dayjs(firstDay).isBefore(tomorrow) ? tomorrow : dayjs(firstDay);
-    let addedFasts = 0;
-
-    while (addedFasts < missedFasts) {
-      const isMenstruationDay = menstruationDays.some(mDay =>
-        dayjs(mDay).isSame(currentDay, 'day')
-      );
-
-      if (!isMenstruationDay) {
-        availableDays.push(currentDay.toDate());
-        addedFasts++;
+    if (selectedToggle === 'MonThu') {
+      // Highlight Monday and Thursday
+      let count = 0;
+      let nextDate = new Date(today);
+      while (count < missedFasts) {
+        while (nextDate.getDay() !== 1 && nextDate.getDay() !== 4) {
+          nextDate.setDate(nextDate.getDate() + 1); // Advance to Monday or Thursday
+        }
+        highlightedDays.push(new Date(nextDate));
+        nextDate.setDate(nextDate.getDate() + 1); // Move to the next day to continue
+        count++;
       }
-
-      currentDay = currentDay.add(1, 'day');
+    } else if (selectedToggle === 'EveryOther') {
+      // Highlight every other day
+      for (let i = 0; i < missedFasts; i++) {
+        let nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i * 2); // Every other day
+        highlightedDays.push(nextDate);
+      }
+    } else if (selectedToggle === 'Consecutively') {
+      // Highlight consecutive days
+      for (let i = 0; i < missedFasts; i++) {
+        let nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i); // Consecutive days
+        highlightedDays.push(nextDate);
+      }
     }
 
-    return availableDays;
-  };
-
-  const availableDays = React.useMemo(() => {
-    if (missedFasts === 0 || !firstDay) {
-      return [];
-    }
-    return calculateAvailableDays();
-  }, [firstDay, missedFasts, cycleLength, menstruationDuration]);
-
-  const customDayContent = (day: Date) => {
-    const isHighlighted = availableDays.some(availableDay =>
-      dayjs(availableDay).isSame(day, 'day')
-    );
-
-    return isHighlighted ? (
-      <div style={{ backgroundColor: "lightpink", borderRadius: "2px", padding: "2px", textAlign: 'center' }}>
-        Available
-      </div>
-    ) : null;
-  };
+    return highlightedDays;
+  }, [selectedToggle, missedFasts, firstDay]);
 
   return (
     <div className="relative min-h-screen backdrop-blur-sm bg-[url('background.png.png')] bg-cover bg-center bg-fixed">
@@ -120,7 +111,6 @@ const MissedFastsInput = () => {
         <Input
           type="number"
           min="1"
-          max="100"
           value={missedFasts || ''}
           onChange={handleInputChange}
           className="border rounded-2xl p-2 text-center mb-4"
@@ -148,13 +138,35 @@ const MissedFastsInput = () => {
           selected={firstDay}
           onSelect={handleFirstDayChange}
           modifiers={{
-            highlighted: availableDays,
+            highlighted: calculateHighlightedDays, // Use the highlighted days based on toggle
           }}
           modifiersStyles={{
             highlighted: { backgroundColor: 'lightpink', color: 'white' },
           }}
         />
-
+        <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-16">
+          <Button
+            variant={selectedToggle === 'MonThu' ? 'solid' : 'outline'}
+            onClick={() => setSelectedToggle('MonThu')}
+            className='w-24'
+          >
+            Mon + Thu
+          </Button>
+          <Button
+            variant={selectedToggle === 'EveryOther' ? 'solid' : 'outline'}
+            onClick={() => setSelectedToggle('EveryOther')}
+            className='w-32'
+          >
+            Every other day
+          </Button>
+          <Button
+            variant={selectedToggle === 'Consecutively' ? 'solid' : 'outline'}
+            onClick={() => setSelectedToggle('Consecutively')}
+            className='w-24'
+          >
+            Daily
+          </Button>
+        </div>
         {error && <div className="text-red-500 mb-4">{error}</div>}
       </div>
     </div>
