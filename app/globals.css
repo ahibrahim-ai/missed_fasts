@@ -1,27 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto sans', sans-Serif ;
+  color: #17231D
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #FFFFFF
+--foreground: #0A0A0A
+--card: #FFFFFF
+--card-foreground: #0A0A0A
+--popover: #FFFFFF
+--popover-foreground: #D8B7B7
+--primary: #3D1647
+--primary-foreground: #1A331A
+--secondary: #F5F5F5
+--secondary-foreground: #171717
+--muted: #F5F5F5
+--muted-foreground: #737373
+--accent: #F6BB8A
+--accent-foreground: #171717
+--destructive: #D8233C
+--destructive-foreground: #FAFAFA
+--border: #1B331E
+--input: #353535
+--ring: #0A0A0A
+--chart-1: #F27850
+--chart-2: #2D9E99
+--chart-3: #206573
+--chart-4: #B9DD4C
+--chart-5: #F2A244
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: #FEFAF6
+--foreground: #FAFAFA
+--card: #0A0A0A
+--card-foreground: #FAFAFA
+--popover: #0A0A0A
+--popover-foreground: #FAFAFA
+--primary: #D58C53
+--primary-foreground: #171717
+--secondary: #262626
+--secondary-foreground: #FAFAFA
+--muted: #262626
+--muted-foreground: #A1A1A1
+--accent: #262626
+--accent-foreground: #FAFAFA
+--destructive: #992033
+--destructive-foreground: #FAFAFA
+--border: #262626
+--input: #262626
+--ring: #D4D4D4
+--chart-1: #4D8EFA
+--chart-2: #33A383
+--chart-3: #FF9933
+--chart-4: #9F5BCC
+--chart-5: #D94B7F
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground;
   }
 }
