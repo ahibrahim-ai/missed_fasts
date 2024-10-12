@@ -132,6 +132,7 @@ const MissedFastsInput = () => {
           onChange={handleMenstruationDurationChange}
           className="border rounded-2xl p-2 text-center mb-4"
         />
+      <div className="flex flex-col justify-center pt-1 relative items-center">
         <Label className="block mb-2">First day of last menstrual cycle:</Label>
         <DayPicker 
           mode="single"
@@ -144,22 +145,23 @@ const MissedFastsInput = () => {
             highlighted: { backgroundColor: 'lightpink', color: 'white' },
           }}
         />
+        </div>
         <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-4">
           <Button
             onClick={() => setSelectedToggle('MonThu')}
-            className={`w-24 ${selectedToggle === 'MonThu' ? 'border border-black' : 'bg-rose-800'}`}
+            className={`w-24 ${selectedToggle === 'MonThu' ? 'rounded-3xl border border-black' : 'rounded-3xl bg-[#d39f8d]'}`}
           >
             Mon + Thu
           </Button>
           <Button
             onClick={() => setSelectedToggle('EveryOther')}
-            className={`w-32 ${selectedToggle === 'EveryOther' ? 'border border-black' : 'bg-rose-800'}`}
+            className={`w-32 ${selectedToggle === 'EveryOther' ? 'rounded-3xl border border-black' : 'rounded-3xl bg-[#d39f8d]'}`}
           >
             Every other day
           </Button>
           <Button
             onClick={() => setSelectedToggle('Consecutively')}
-            className={`w-24 ${selectedToggle === 'Consecutively' ? 'border border-black' : 'bg-rose-800'}`}
+            className={`w-24 ${selectedToggle === 'Consecutively' ? 'rounded-3xl border border-black' : 'rounded-3xl bg-[#d39f8d]'}`}
           >
             Daily
           </Button>
