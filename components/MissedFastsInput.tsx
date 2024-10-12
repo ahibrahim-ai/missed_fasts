@@ -9,7 +9,7 @@ import 'react-day-picker/dist/style.css'; // Import react-day-picker styles
 
 const MissedFastsInput = () => {
   const [missedFasts, setMissedFasts] = React.useState<number>(0);
-  const [firstDay, setFirstDay] = React.useState<Date | null>(null);
+  const [firstDay, setFirstDay] = React.useState<Date>(new Date());
   const [cycleLength, setCycleLength] = React.useState<number>(28);
   const [menstruationDuration, setMenstruationDuration] = React.useState<number>(7);
   const [error, setError] = React.useState<string>("");
@@ -27,7 +27,7 @@ const MissedFastsInput = () => {
 
   // Handle first day of last menstrual cycle change
   const handleFirstDayChange = (date: Date | undefined) => {
-    setFirstDay(date ?? null);
+    setFirstDay(date ?? new Date());
     setError("");
   };
 
