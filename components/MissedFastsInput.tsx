@@ -133,7 +133,7 @@ const MissedFastsInput = () => {
           className="border rounded-2xl p-2 text-center mb-4"
         />
     
-        <Label className="block mb-2">First day of last menstrual cycle:</Label>
+        <Label className="block mb-0">First day of last menstrual cycle:</Label>
         <DayPicker 
           mode="single"
           selected={firstDay}
@@ -142,10 +142,10 @@ const MissedFastsInput = () => {
             highlighted: calculateHighlightedDays, // Use the highlighted days based on toggle
           }}
           modifiersStyles={{
-            highlighted: { backgroundColor: 'lightpink', color: 'white' },
+            highlighted: { backgroundColor: '#eeccbb', color: 'white'},
           }}
         />
-        <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-4">
+        <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-0">
           <Button
             onClick={() => setSelectedToggle('MonThu')}
             className={`w-24 ${selectedToggle === 'MonThu' ? 'rounded-3xl border border-black' : 'rounded-3xl bg-[#d39f8d]'}`}
