@@ -132,7 +132,7 @@ const MissedFastsInput = () => {
           onChange={handleMenstruationDurationChange}
           className="border rounded-2xl p-2 text-center mb-4"
         />
-      <div className="flex flex-col justify-center pt-1 relative items-center">
+    
         <Label className="block mb-2">First day of last menstrual cycle:</Label>
         <DayPicker 
           mode="single"
@@ -145,7 +145,6 @@ const MissedFastsInput = () => {
             highlighted: { backgroundColor: 'lightpink', color: 'white' },
           }}
         />
-        </div>
         <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-4">
           <Button
             onClick={() => setSelectedToggle('MonThu')}
