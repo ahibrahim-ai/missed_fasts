@@ -144,25 +144,22 @@ const MissedFastsInput = () => {
             highlighted: { backgroundColor: 'lightpink', color: 'white' },
           }}
         />
-        <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-16">
+        <div className="relative flex flex-row max-w-screen-sm space-x-5 justify-center mt-4">
           <Button
-            variant={selectedToggle === 'MonThu' ? 'solid' : 'outline'}
             onClick={() => setSelectedToggle('MonThu')}
-            className='w-24'
+            className={`w-24 ${selectedToggle === 'MonThu' ? 'border border-black' : 'bg-rose-800'}`}
           >
             Mon + Thu
           </Button>
           <Button
-            variant={selectedToggle === 'EveryOther' ? 'solid' : 'outline'}
             onClick={() => setSelectedToggle('EveryOther')}
-            className='w-32'
+            className={`w-32 ${selectedToggle === 'EveryOther' ? 'border border-black' : 'bg-rose-800'}`}
           >
             Every other day
           </Button>
           <Button
-            variant={selectedToggle === 'Consecutively' ? 'solid' : 'outline'}
             onClick={() => setSelectedToggle('Consecutively')}
-            className='w-24'
+            className={`w-24 ${selectedToggle === 'Consecutively' ? 'border border-black' : 'bg-rose-800'}`}
           >
             Daily
           </Button>
