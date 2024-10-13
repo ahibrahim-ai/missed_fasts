@@ -1,5 +1,5 @@
 "use client"
-
+import "../../app/globals.css"
 import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons"
 import { DayPicker } from "react-day-picker"
@@ -49,7 +49,7 @@ function Calendar({
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-[#fbebe3] text-primary-foreground hover:bg-[#fbebe3] hover:text-primary-foreground focus:bg-[#fbebe3] focus:text-primary-foreground",
+          "bg-rdp-day--selected  text-primary-foreground hover:bg-[#fbebe3] hover:text-primary-foreground focus:bg-[#fbebe3] focus:text-primary-foreground",
         day_today: "bg-accent text-accent-foreground",
         day_outside:
           "day-outside text-muted-foreground opacity-50  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",

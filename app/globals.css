@@ -78,3 +78,23 @@ body {
     @apply text-foreground;
   }
 }
+
+/* Custom style for the selected day */
+.rdp-day_selected {
+  background-color: #353535 !important; /* Change the background color */
+  color: white !important;              /* Change the text color */
+  border-radius: 50%;                   /* Optional: make the selected day a perfect circle */
+  border: none;                         /* Remove border if necessary */
+}
+
+.rdp-day_today {
+  background-color: #c2977c !important; /* Change the background color */
+  color: white !important;              /* Change the text color */
+  border-radius: 50%;                   /* Optional: make the selected day a perfect circle */
+  border: none;                         /* Remove border if necessary */
+}
+.accent {
+  background-color: #fcece5;
+  border-radius: 50%;
+  border: none;
+}
